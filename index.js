@@ -3275,11 +3275,12 @@ function drawBlueprint(x, y, w, h) {
 
       drawMiniLabel("YOYO", (cx - r * 1.4) | 0, (cy + r + 14) | 0);
     } else if (kind === 80) {
-  // Space Invader (stroke-only, simple pixel sprite)
+  // Space Invader (outline-only: stroke just the outer boundary, no interior grid)
   const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
   const bx = (x + (w - s) / 2) | 0;
   const by = (y + (h - s) / 2) | 0;
   const p = Math.max(2, (s / 8) | 0); // pixel size
+
   const grid = [
     "00111100",
     "01111110",
@@ -3290,13 +3291,60 @@ function drawBlueprint(x, y, w, h) {
     "01000010",
     "00100100",
   ];
+
+  const on = (gx, gy) =>
+    gy >= 0 && gy < 8 && gx >= 0 && gx < 8 && grid[gy][gx] === "1";
+
+  // Make segment joins look nice and avoid rounded “dots” at corners
+  const prevJoin = sctx.lineJoin;
+  const prevCap = sctx.lineCap;
+  sctx.lineJoin = "miter";
+  sctx.lineCap = "square";
+
+  // Optional: a tiny half-pixel nudge can make strokes crisper (feel free to remove)
+  // sctx.save();
+  // sctx.translate(0.5, 0.5);
+
+  sctx.beginPath();
+
   for (let gy = 0; gy < 8; gy++) {
     for (let gx = 0; gx < 8; gx++) {
-      if (grid[gy][gx] === "1") {
-        sctx.strokeRect(bx + gx * p, by + gy * p, p, p);
+      if (!on(gx, gy)) continue;
+
+      const x0 = bx + gx * p;
+      const y0 = by + gy * p;
+      const x1 = x0 + p;
+      const y1 = y0 + p;
+
+      // Top edge (no filled cell above)
+      if (!on(gx, gy - 1)) {
+        sctx.moveTo(x0, y0);
+        sctx.lineTo(x1, y0);
+      }
+      // Right edge (no filled cell to the right)
+      if (!on(gx + 1, gy)) {
+        sctx.moveTo(x1, y0);
+        sctx.lineTo(x1, y1);
+      }
+      // Bottom edge (no filled cell below)
+      if (!on(gx, gy + 1)) {
+        sctx.moveTo(x1, y1);
+        sctx.lineTo(x0, y1);
+      }
+      // Left edge (no filled cell to the left)
+      if (!on(gx - 1, gy)) {
+        sctx.moveTo(x0, y1);
+        sctx.lineTo(x0, y0);
       }
     }
   }
+
+  sctx.stroke();
+
+  // sctx.restore(); // if you enabled translate(0.5, 0.5)
+
+  sctx.lineJoin = prevJoin;
+  sctx.lineCap = prevCap;
 } else if (kind === 81) {
   // Smiley face (stroke-only)
   const s = Math.max(18, Math.min(w, h) * 0.64) | 0;
