@@ -637,7 +637,7 @@ const KNIGHT = [
 // Shuffle-bag helpers (even frequency / no repeats until cycle)
 // ---------------------------
 
-const SYMBOL_COUNT = 80;
+const SYMBOL_COUNT = 84;
 let symbolBag = [];
 function nextSymbolKind() {
   if (!symbolBag.length) {
@@ -846,6 +846,19 @@ const PHRASES_ORIGINAL = [
   "PIXEL SERMON",
   "ELECTRIC LULLABY",
   "SPECTRAL SCHEMATICS",
+  "ANALOG GLOW",
+  "NEON GRID HORIZON",
+  "VECTOR WIREFRAME",
+  "TERMINAL // GREEN",
+  "LOADING...",
+  "ANSI ART",
+  "SYNTH PATCH",
+  "DEMOSCENE",
+  "SOFT ERROR",
+  "MEMORY LEAK LULLABY",
+  "ARCHIVE IN MOTION",
+  "HOLOGRAPHIC",
+  "PLASTIC FANTASTIC",
 ];
 
 const PHRASES_80S_DESIGN = [
@@ -855,20 +868,22 @@ const PHRASES_80S_DESIGN = [
   "PAL / NTSC",
   "CATHODE RAY",
   "CRT PHOSPHOR",
-  "VECTOR WIREFRAME",
-  "NEON GRID HORIZON",
-  "ANALOG GLOW",
   "CHROME TYPE",
   "CASSETTE TAPE",
   "SIDE A / SIDE B",
   "AUTO-REVERSE",
+  "VGA // 256 COLORS",
   "TAPE HISS",
   "CASSETTE CLICK",
   "VINYL CRACKLE",
+  "SPACE INVADERS",
   "FLOPPY DISK 3.5",
+  "MS-DOS",
+  "WALKMAN",
   "POLAROID FLASH",
   "LASERDISC",
   "COMPACT DISC",
+  "VCR",
   "BOOMBOX BLAST",
   "BRICK PHONE",
   "BEEPER // PAGER",
@@ -887,26 +902,39 @@ const PHRASES_80S_DESIGN = [
   "CHORUS PEDAL",
   "REVERB TAIL",
   "FM STEREO",
+  "GIRL GLITTER",
   "TOP 40 RADIO",
   "RADIO EDIT",
   "MAXI-SINGLE 12-INCH",
   "ACID WASH",
   "BOXY BLAZER",
   "SHOULDER PADS",
+  "SCRUNCHIE",
+  "SEQUINS",
   "HAIRSPRAY CLOUD",
+  "GLAM PUNK",
+  "ELECTRIC BLUE",
+  "HOT PINK",
   "HYPERCOLOR",
   "PAC-MAN",
-  "SEGA",
+  "CABLE TV",
+  "WIND-BREAKER",
+  "MULLET MODE",
   "RADICAL",
+  "VIDEO GAMES",
   "COMMODORE 64",
   "DONKEY KONG",
   "FANNY PACK",
+  "TANG",
   "ROLLER RINK",
+  "CAPRI SUN",
+  "PLASTIC WATCH",
   "MALL FOOD COURT",
   "SATURDAY MORNING",
+  "SCHOOL LOCKER",
   "NEON SUNSET",
-  "MIAMI VICE VIBES",
   "CHERRY COLA",
+  "SKITTLES",
   "BUBBLEGUM POP",
   "STICKER BOOK",
   "TRAPPER KEEPER",
@@ -927,6 +955,16 @@ const PHRASES_80S_DESIGN = [
   "LIKE, TOTALLY",
   "BODACIOUS",
   "CHILL PILL",
+  "FRESH",
+  "EPIC",
+  "RELAX",
+  "DON'T PANIC",
+  "YUPPIE",
+  "TAKE A HIKE",
+  "VIBES",
+  "PARTY ON!",
+  "DITTO",
+  "LAME",
 ];
 
 const PHRASES_80S_HOOKS = [
@@ -935,7 +973,6 @@ const PHRASES_80S_HOOKS = [
   "BILLIE JEAN",
   "THRILLER",
   "PURPLE RAIN",
-  "1999",
   "LIKE A VIRGIN",
   "MATERIAL GIRL",
   "GIRLS JUST WANT TO HAVE FUN",
@@ -947,11 +984,18 @@ const PHRASES_80S_HOOKS = [
   "EVERY BREATH YOU TAKE",
   "WITH OR WITHOUT YOU",
   "LIVIN' ON A PRAYER",
+  "SLEDGEHAMMER",
   "DON'T STOP BELIEVIN'",
+  "FRIDAY I'M IN LOVE",
+  "TAKE ME OUT TONIGHT",
   "AFRICA",
+  "99 LUFTBALLONS",
+  "KIDS IN AMERICA",
   "DANGER ZONE",
   "DON'T YOU WANT ME",
+  "ALL I EVER KNEW ONLY YOU",
   "TAINTED LOVE",
+  "I'M YOUR VENUS",
   "KISS",
   "BAD",
   "BLUE MONDAY",
@@ -966,25 +1010,35 @@ const PHRASES_80S_HOOKS = [
   "TRUE COLORS",
   "LAST CHRISTMAS",
   "BACK TO THE FUTURE",
+  "WE DON'T NEED ROADS",
   "GHOSTBUSTERS",
   "WHO YOU GONNA CALL",
   "BEVERLY HILLS COP",
   "TOP GUN",
+  "ALF",
+  "GIZMO",
   "THE KARATE KID",
+  "CALLAHAN",
   "DIRTY DANCING",
   "FOOTLOOSE",
   "WAX ON",
   "WAX OFF",
+  "HEY, DOC",
   "EXCELLENT!",
+  "STREET FIGHTER",
   "GET A CLUE",
-  "LABYRINTH",
+  "DeLOREAN",
   "COMMANDO",
   "THE BREAKFAST CLUB",
   "THE GOONIES",
   "SPACEBALLS",
   "RAIDERS OF THE LOST ARK",
   "E.T.",
-  "PARIS, TEXAS",
+  "GREMLINS",
+  "MAGNUM P.I.",
+  "FAME",
+  "McFLY",
+  "I PITY THE FOOL",
   "PRETTY IN PINK",
   "REPO MAN",
   "KNIGHT RIDER",
@@ -993,10 +1047,10 @@ const PHRASES_80S_HOOKS = [
   "MIAMI VICE",
   "BANANA BOAT",
   "IT'S SHOWTIME!",
+  "GREED IS GOOD",
+  "JUST SAY NO",
   "STAND BY ME",
   "I WANT MY MTV",
-  "PARTY ON",
-  "FIZZ, FIZZ",
 ];
 
 function initStampCanvas() {
@@ -3220,6 +3274,132 @@ function drawBlueprint(x, y, w, h) {
       sctx.globalAlpha = 1;
 
       drawMiniLabel("YOYO", (cx - r * 1.4) | 0, (cy + r + 14) | 0);
+    } else if (kind === 80) {
+  // Space Invader (stroke-only, simple pixel sprite)
+  const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+  const bx = (x + (w - s) / 2) | 0;
+  const by = (y + (h - s) / 2) | 0;
+  const p = Math.max(2, (s / 8) | 0); // pixel size
+  const grid = [
+    "00111100",
+    "01111110",
+    "11111111",
+    "11011011",
+    "11111111",
+    "00100100",
+    "01000010",
+    "00100100",
+  ];
+  for (let gy = 0; gy < 8; gy++) {
+    for (let gx = 0; gx < 8; gx++) {
+      if (grid[gy][gx] === "1") {
+        sctx.strokeRect(bx + gx * p, by + gy * p, p, p);
+      }
+    }
+  }
+} else if (kind === 81) {
+  // Smiley face (stroke-only)
+  const s = Math.max(18, Math.min(w, h) * 0.64) | 0;
+  const cx = x + w / 2;
+  const cy = y + h / 2;
+  const r = s * 0.5;
+  sctx.beginPath();
+  sctx.arc(cx, cy, r, 0, Math.PI * 2);
+  sctx.stroke();
+
+  // eyes
+  const er = Math.max(2, r * 0.08);
+  sctx.beginPath();
+  sctx.arc(cx - r * 0.18, cy - r * 0.12, er, 0, Math.PI * 2);
+  sctx.arc(cx + r * 0.18, cy - r * 0.12, er, 0, Math.PI * 2);
+  sctx.stroke();
+
+  // smile
+  sctx.beginPath();
+  sctx.arc(cx, cy + r * 0.08, r * 0.28, 0, Math.PI);
+  sctx.stroke();
+} else if (kind === 82) {
+  // Heart pierced with arrow (stroke-only)
+  const s = Math.max(18, Math.min(w, h) * 0.66) | 0;
+  const cx = x + w / 2;
+  const cy = y + h / 2;
+  const r = s * 0.22;
+
+  // heart outline
+  sctx.beginPath();
+  sctx.moveTo(cx, cy + r * 1.6);
+  sctx.bezierCurveTo(
+    cx - r * 2.2,
+    cy + r * 0.6,
+    cx - r * 2.0,
+    cy - r * 1.2,
+    cx,
+    cy - r * 0.2
+  );
+  sctx.bezierCurveTo(
+    cx + r * 2.0,
+    cy - r * 1.2,
+    cx + r * 2.2,
+    cy + r * 0.6,
+    cx,
+    cy + r * 1.6
+  );
+  sctx.stroke();
+
+  // arrow
+  const ax0 = cx - r * 2.4;
+  const ay0 = cy + r * 1.8;
+  const ax1 = cx + r * 2.8;
+  const ay1 = cy - r * 1.6;
+  sctx.beginPath();
+  sctx.moveTo(ax0, ay0);
+  sctx.lineTo(ax1, ay1);
+  sctx.stroke();
+
+  // arrow head
+  const ah = r * 0.6;
+  const ang = Math.atan2(ay1 - ay0, ax1 - ax0);
+  sctx.beginPath();
+  sctx.moveTo(ax1, ay1);
+  sctx.lineTo(
+    ax1 - Math.cos(ang - Math.PI / 6) * ah,
+    ay1 - Math.sin(ang - Math.PI / 6) * ah
+  );
+  sctx.moveTo(ax1, ay1);
+  sctx.lineTo(
+    ax1 - Math.cos(ang + Math.PI / 6) * ah,
+    ay1 - Math.sin(ang + Math.PI / 6) * ah
+  );
+  sctx.stroke();
+
+  // fletching
+  const fx = ax0 + Math.cos(ang) * (r * 0.7);
+  const fy = ay0 + Math.sin(ang) * (r * 0.7);
+  sctx.beginPath();
+  sctx.moveTo(fx, fy);
+  sctx.lineTo(
+    fx + Math.cos(ang + Math.PI / 2) * ah * 0.7,
+    fy + Math.sin(ang + Math.PI / 2) * ah * 0.7
+  );
+  sctx.moveTo(fx, fy);
+  sctx.lineTo(
+    fx + Math.cos(ang - Math.PI / 2) * ah * 0.7,
+    fy + Math.sin(ang - Math.PI / 2) * ah * 0.7
+  );
+  sctx.stroke();
+} else if (kind === 83) {
+  // Diamond (stroke-only)
+  const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+  const cx = x + w / 2;
+  const cy = y + h / 2;
+  const r = s * 0.5;
+  sctx.beginPath();
+  sctx.moveTo(cx, cy - r);
+  sctx.lineTo(cx + r, cy);
+  sctx.lineTo(cx, cy + r);
+  sctx.lineTo(cx - r, cy);
+  sctx.closePath();
+  sctx.stroke();
     } else {
       // Fallback: tiny memphis squiggle
       const tx = (x + w * 0.18) | 0;
