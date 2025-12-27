@@ -637,7 +637,7 @@ const KNIGHT = [
 // Shuffle-bag helpers (even frequency / no repeats until cycle)
 // ---------------------------
 
-const SYMBOL_COUNT = 84;
+const SYMBOL_COUNT = 93;
 let symbolBag = [];
 function nextSymbolKind() {
   if (!symbolBag.length) {
@@ -859,6 +859,8 @@ const PHRASES_ORIGINAL = [
   "ARCHIVE IN MOTION",
   "HOLOGRAPHIC",
   "PLASTIC FANTASTIC",
+  "CGA / EGA",
+  "SYSTEM ERROR",
 ];
 
 const PHRASES_80S_DESIGN = [
@@ -872,7 +874,6 @@ const PHRASES_80S_DESIGN = [
   "CASSETTE TAPE",
   "SIDE A / SIDE B",
   "AUTO-REVERSE",
-  "VGA // 256 COLORS",
   "TAPE HISS",
   "CASSETTE CLICK",
   "VINYL CRACKLE",
@@ -881,15 +882,18 @@ const PHRASES_80S_DESIGN = [
   "MS-DOS",
   "WALKMAN",
   "POLAROID FLASH",
+  "VIEW-MASTER",
   "LASERDISC",
   "COMPACT DISC",
-  "VCR",
+  "V C R",
   "BOOMBOX BLAST",
   "BRICK PHONE",
   "BEEPER // PAGER",
+  "POCKET CALCULATOR",
   "DOT-MATRIX PRINT",
   "DIAL TONE",
   "INSERT COIN",
+  "SYNTH POP",
   "ARCADE // HI-SCORE",
   "ARCADE TOKENS",
   "8-BIT CONSOLE",
@@ -906,48 +910,64 @@ const PHRASES_80S_DESIGN = [
   "TOP 40 RADIO",
   "RADIO EDIT",
   "MAXI-SINGLE 12-INCH",
-  "ACID WASH",
+  "A C I D  W A S H",
   "BOXY BLAZER",
   "SHOULDER PADS",
   "SCRUNCHIE",
+  "TROPICAL BARBIE",
   "SEQUINS",
   "HAIRSPRAY CLOUD",
-  "GLAM PUNK",
+  "BEACH PARTY",
+  "BLACK LIGHT",
+  "FLAMINGO INN",
   "ELECTRIC BLUE",
   "HOT PINK",
-  "HYPERCOLOR",
   "PAC-MAN",
   "CABLE TV",
+  "HAIR GEL",
   "WIND-BREAKER",
   "MULLET MODE",
   "RADICAL",
   "VIDEO GAMES",
+  "NINTENDO",
   "COMMODORE 64",
   "DONKEY KONG",
   "FANNY PACK",
-  "TANG",
   "ROLLER RINK",
   "CAPRI SUN",
   "PLASTIC WATCH",
+  "HIGH WAIST",
+  "MY LITTLE PONY",
   "MALL FOOD COURT",
   "SATURDAY MORNING",
   "SCHOOL LOCKER",
   "NEON SUNSET",
+  "SEXY SAX",
   "CHERRY COLA",
+  "JELLY SHOES",
   "SKITTLES",
   "BUBBLEGUM POP",
+  "SLAP BRACELET",
   "STICKER BOOK",
+  "MALL BANGS",
   "TRAPPER KEEPER",
+  "LITE-BRITE",
+  "ETCH A SKETCH",
+  "HE-MAN",
   "ADMIT ONE",
   "MATINEE",
   "MAKE MY DAY",
-  "BOGUS",
-  "DAMAGE",
+  "D & D",
+  "BIG HAIR",
+  "WHAT'S YOUR DAMAGE?",
   "ROW A",
+  "CCCP",
   "SEAT 12",
   "DANCE FLOOR",
   "TOTAL RAD",
   "NEON NIGHTS",
+  "SWEATBANDS",
+  "EAST BLOCK",
   "REC ●",
   "PSYCH!",
   "WHOA!",
@@ -956,101 +976,13 @@ const PHRASES_80S_DESIGN = [
   "BODACIOUS",
   "CHILL PILL",
   "FRESH",
-  "EPIC",
   "RELAX",
   "DON'T PANIC",
   "YUPPIE",
   "TAKE A HIKE",
-  "VIBES",
   "PARTY ON!",
-  "DITTO",
   "LAME",
-];
-
-const PHRASES_80S_HOOKS = [
-  "TAKE ON ME",
-  "SWEET DREAMS",
-  "BILLIE JEAN",
-  "THRILLER",
-  "PURPLE RAIN",
-  "LIKE A VIRGIN",
-  "MATERIAL GIRL",
-  "GIRLS JUST WANT TO HAVE FUN",
-  "TIME AFTER TIME",
-  "I WANNA DANCE WITH SOMEBODY",
-  "CARELESS WHISPER",
-  "WAKE ME UP BEFORE YOU GO-GO",
-  "NEVER GONNA GIVE YOU UP",
-  "EVERY BREATH YOU TAKE",
-  "WITH OR WITHOUT YOU",
-  "LIVIN' ON A PRAYER",
-  "SLEDGEHAMMER",
-  "DON'T STOP BELIEVIN'",
-  "FRIDAY I'M IN LOVE",
-  "TAKE ME OUT TONIGHT",
-  "AFRICA",
-  "99 LUFTBALLONS",
-  "KIDS IN AMERICA",
-  "DANGER ZONE",
-  "DON'T YOU WANT ME",
-  "ALL I EVER KNEW ONLY YOU",
-  "TAINTED LOVE",
-  "I'M YOUR VENUS",
-  "KISS",
-  "BAD",
-  "BLUE MONDAY",
-  "HUNGRY LIKE THE WOLF",
-  "RIO",
-  "THE FINAL COUNTDOWN",
-  "EYE OF THE TIGER",
-  "THE POWER OF LOVE",
-  "MONEY FOR NOTHING",
-  "DANCING IN THE DARK",
-  "TAKE MY BREATH AWAY",
-  "TRUE COLORS",
-  "LAST CHRISTMAS",
-  "BACK TO THE FUTURE",
-  "WE DON'T NEED ROADS",
-  "GHOSTBUSTERS",
-  "WHO YOU GONNA CALL",
-  "BEVERLY HILLS COP",
-  "TOP GUN",
-  "ALF",
-  "GIZMO",
-  "THE KARATE KID",
-  "CALLAHAN",
-  "DIRTY DANCING",
-  "FOOTLOOSE",
-  "WAX ON",
-  "WAX OFF",
-  "HEY, DOC",
-  "EXCELLENT!",
-  "STREET FIGHTER",
-  "GET A CLUE",
-  "DeLOREAN",
-  "COMMANDO",
-  "THE BREAKFAST CLUB",
-  "THE GOONIES",
-  "SPACEBALLS",
-  "RAIDERS OF THE LOST ARK",
-  "E.T.",
-  "GREMLINS",
-  "MAGNUM P.I.",
-  "FAME",
-  "McFLY",
-  "I PITY THE FOOL",
-  "PRETTY IN PINK",
-  "REPO MAN",
-  "KNIGHT RIDER",
-  "AFTER HOURS",
-  "GOLDEN GIRLS",
-  "MIAMI VICE",
-  "BANANA BOAT",
-  "IT'S SHOWTIME!",
-  "GREED IS GOOD",
-  "JUST SAY NO",
-  "STAND BY ME",
-  "I WANT MY MTV",
+  "BAND AID",
 ];
 
 function initStampCanvas() {
@@ -1895,11 +1827,11 @@ function drawBlueprint(x, y, w, h) {
         line(
           bx + 1,
           by + (bh * i) / 6,
-          (bx + bw * 0.42) | (0 - 1),
+          ((bx + bw * 0.42) | 0) - 1,
           by + (bh * i) / 6
         );
         line(
-          (bx + bw * 0.56) | (0 + 1),
+          ((bx + bw * 0.56) | 0) + 1,
           by + (bh * i) / 6,
           bx + bw - 2,
           by + (bh * i) / 6
@@ -3275,179 +3207,597 @@ function drawBlueprint(x, y, w, h) {
 
       drawMiniLabel("YOYO", (cx - r * 1.4) | 0, (cy + r + 14) | 0);
     } else if (kind === 80) {
-  // Space Invader (outline-only: stroke just the outer boundary, no interior grid)
-  const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
-  const bx = (x + (w - s) / 2) | 0;
-  const by = (y + (h - s) / 2) | 0;
-  const p = Math.max(2, (s / 8) | 0); // pixel size
+      // Space Invader (outline-only: stroke just the outer boundary, no interior grid)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+      const p = Math.max(2, (s / 8) | 0); // pixel size
 
-  const grid = [
-    "00111100",
-    "01111110",
-    "11111111",
-    "11011011",
-    "11111111",
-    "00100100",
-    "01000010",
-    "00100100",
-  ];
+      const grid = [
+        "00111100",
+        "01111110",
+        "11111111",
+        "11011011",
+        "11111111",
+        "00100100",
+        "01000010",
+        "00100100",
+      ];
 
-  const on = (gx, gy) =>
-    gy >= 0 && gy < 8 && gx >= 0 && gx < 8 && grid[gy][gx] === "1";
+      const on = (gx, gy) =>
+        gy >= 0 && gy < 8 && gx >= 0 && gx < 8 && grid[gy][gx] === "1";
 
-  // Make segment joins look nice and avoid rounded “dots” at corners
-  const prevJoin = sctx.lineJoin;
-  const prevCap = sctx.lineCap;
-  sctx.lineJoin = "miter";
-  sctx.lineCap = "square";
+      // Make segment joins look nice and avoid rounded “dots” at corners
+      const prevJoin = sctx.lineJoin;
+      const prevCap = sctx.lineCap;
+      sctx.lineJoin = "miter";
+      sctx.lineCap = "square";
 
-  // Optional: a tiny half-pixel nudge can make strokes crisper (feel free to remove)
-  // sctx.save();
-  // sctx.translate(0.5, 0.5);
+      // Optional: a tiny half-pixel nudge can make strokes crisper (feel free to remove)
+      // sctx.save();
+      // sctx.translate(0.5, 0.5);
 
-  sctx.beginPath();
+      sctx.beginPath();
 
-  for (let gy = 0; gy < 8; gy++) {
-    for (let gx = 0; gx < 8; gx++) {
-      if (!on(gx, gy)) continue;
+      for (let gy = 0; gy < 8; gy++) {
+        for (let gx = 0; gx < 8; gx++) {
+          if (!on(gx, gy)) continue;
 
-      const x0 = bx + gx * p;
-      const y0 = by + gy * p;
-      const x1 = x0 + p;
-      const y1 = y0 + p;
+          const x0 = bx + gx * p;
+          const y0 = by + gy * p;
+          const x1 = x0 + p;
+          const y1 = y0 + p;
 
-      // Top edge (no filled cell above)
-      if (!on(gx, gy - 1)) {
-        sctx.moveTo(x0, y0);
-        sctx.lineTo(x1, y0);
+          // Top edge (no filled cell above)
+          if (!on(gx, gy - 1)) {
+            sctx.moveTo(x0, y0);
+            sctx.lineTo(x1, y0);
+          }
+          // Right edge (no filled cell to the right)
+          if (!on(gx + 1, gy)) {
+            sctx.moveTo(x1, y0);
+            sctx.lineTo(x1, y1);
+          }
+          // Bottom edge (no filled cell below)
+          if (!on(gx, gy + 1)) {
+            sctx.moveTo(x1, y1);
+            sctx.lineTo(x0, y1);
+          }
+          // Left edge (no filled cell to the left)
+          if (!on(gx - 1, gy)) {
+            sctx.moveTo(x0, y1);
+            sctx.lineTo(x0, y0);
+          }
+        }
       }
-      // Right edge (no filled cell to the right)
-      if (!on(gx + 1, gy)) {
-        sctx.moveTo(x1, y0);
-        sctx.lineTo(x1, y1);
+
+      sctx.stroke();
+
+      sctx.lineJoin = prevJoin;
+      sctx.lineCap = prevCap;
+    } else if (kind === 81) {
+      // Smiley face (stroke-only)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+
+      const cx = bx + s / 2;
+      const cy = by + s / 2;
+      const r = s * 0.42;
+
+      // head
+      sctx.beginPath();
+      sctx.arc(cx, cy, r, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // eyes
+      const er = Math.max(1, (r * 0.1) | 0);
+      const ex = r * 0.35;
+      const ey = r * 0.18;
+
+      sctx.beginPath();
+      sctx.arc(cx - ex, cy - ey, er, 0, Math.PI * 2);
+      sctx.arc(cx + ex, cy - ey, er, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // smile
+      sctx.beginPath();
+      sctx.arc(cx, cy + r * 0.12, r * 0.55, 0.15 * Math.PI, 0.85 * Math.PI);
+      sctx.stroke();
+    } else if (kind === 82) {
+      // Heart pierced with arrow (stroke-only)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+
+      const cx = bx + s / 2;
+      const cy = by + s / 2;
+
+      const topY = cy - s * 0.18;
+      const bottomY = cy + s * 0.3;
+
+      // heart outline
+      sctx.beginPath();
+      sctx.moveTo(cx, bottomY);
+      sctx.bezierCurveTo(
+        cx - s * 0.48,
+        cy + s * 0.08,
+        cx - s * 0.46,
+        cy - s * 0.28,
+        cx,
+        topY
+      );
+      sctx.bezierCurveTo(
+        cx + s * 0.46,
+        cy - s * 0.28,
+        cx + s * 0.48,
+        cy + s * 0.08,
+        cx,
+        bottomY
+      );
+      sctx.closePath();
+      sctx.stroke();
+
+      // arrow line (diagonal through heart)
+      const x1 = cx - s * 0.58;
+      const y1 = cy + s * 0.26;
+      const x2 = cx + s * 0.58;
+      const y2 = cy - s * 0.36;
+
+      sctx.beginPath();
+      sctx.moveTo(x1, y1);
+      sctx.lineTo(x2, y2);
+
+      const ang = Math.atan2(y2 - y1, x2 - x1);
+      const ah = s * 0.12;
+
+      // arrow head
+      sctx.moveTo(x2, y2);
+      sctx.lineTo(
+        x2 - ah * Math.cos(ang - Math.PI / 6),
+        y2 - ah * Math.sin(ang - Math.PI / 6)
+      );
+      sctx.moveTo(x2, y2);
+      sctx.lineTo(
+        x2 - ah * Math.cos(ang + Math.PI / 6),
+        y2 - ah * Math.sin(ang + Math.PI / 6)
+      );
+
+      // tail fletching
+      const fh = s * 0.1;
+      sctx.moveTo(x1, y1);
+      sctx.lineTo(
+        x1 + fh * Math.cos(ang + Math.PI / 2),
+        y1 + fh * Math.sin(ang + Math.PI / 2)
+      );
+      sctx.moveTo(x1, y1);
+      sctx.lineTo(
+        x1 + fh * Math.cos(ang - Math.PI / 2),
+        y1 + fh * Math.sin(ang - Math.PI / 2)
+      );
+
+      sctx.stroke();
+    } else if (kind === 83) {
+      // Diamond (stroke-only + simple facets)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+
+      const cx = bx + s / 2;
+      const cy = by + s / 2;
+      const r = s * 0.4;
+
+      const topX = cx,
+        topY = cy - r;
+      const rightX = cx + r,
+        rightY = cy;
+      const botX = cx,
+        botY = cy + r;
+      const leftX = cx - r,
+        leftY = cy;
+
+      // outer diamond
+      sctx.beginPath();
+      sctx.moveTo(topX, topY);
+      sctx.lineTo(rightX, rightY);
+      sctx.lineTo(botX, botY);
+      sctx.lineTo(leftX, leftY);
+      sctx.closePath();
+      sctx.stroke();
+
+      // facets
+      sctx.beginPath();
+      sctx.moveTo(cx - r * 0.46, cy - r * 0.12);
+      sctx.lineTo(cx + r * 0.46, cy - r * 0.12);
+
+      sctx.moveTo(topX, topY);
+      sctx.lineTo(cx, cy + r * 0.18);
+
+      sctx.moveTo(leftX, leftY);
+      sctx.lineTo(cx, cy + r * 0.18);
+
+      sctx.moveTo(rightX, rightY);
+      sctx.lineTo(cx, cy + r * 0.18);
+
+      sctx.stroke();
+    } else if (kind === 84) {
+      // Slap Bracelet (stroke-only)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+
+      const cx = bx + s / 2;
+      const cy = by + s / 2;
+      const bandW = s * 0.8;
+      const bandH = s * 0.15;
+
+      // Curved bracelet band
+      sctx.beginPath();
+      sctx.arc(cx, cy, bandW * 0.45, Math.PI * 0.3, Math.PI * 1.7);
+      sctx.stroke();
+
+      sctx.beginPath();
+      sctx.arc(cx, cy, bandW * 0.35, Math.PI * 0.3, Math.PI * 1.7);
+      sctx.stroke();
+
+      // Decorative pattern lines
+      for (let i = 0; i < 5; i++) {
+        const angle = Math.PI * 0.5 + i * 0.25;
+        const r1 = bandW * 0.35;
+        const r2 = bandW * 0.45;
+        const x1 = cx + Math.cos(angle) * r1;
+        const y1 = cy + Math.sin(angle) * r1;
+        const x2 = cx + Math.cos(angle) * r2;
+        const y2 = cy + Math.sin(angle) * r2;
+        line(x1, y1, x2, y2);
       }
-      // Bottom edge (no filled cell below)
-      if (!on(gx, gy + 1)) {
-        sctx.moveTo(x1, y1);
-        sctx.lineTo(x0, y1);
+    } else if (kind === 85) {
+      // View-Master (stroke-only)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+
+      const cx = bx + s / 2;
+      const cy = by + s / 2;
+      const bodyR = s * 0.42;
+
+      // Main circular body
+      sctx.beginPath();
+      sctx.arc(cx, cy, bodyR, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // Two eyepieces
+      const eyeR = bodyR * 0.25;
+      const eyeOffset = bodyR * 0.35;
+
+      sctx.beginPath();
+      sctx.arc(cx - eyeOffset, cy - bodyR * 0.15, eyeR, 0, Math.PI * 2);
+      sctx.arc(cx + eyeOffset, cy - bodyR * 0.15, eyeR, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // Side lever
+      line(cx + bodyR, cy + bodyR * 0.3, cx + bodyR + 6, cy + bodyR * 0.3);
+      line(cx + bodyR + 6, cy + bodyR * 0.3, cx + bodyR + 6, cy + bodyR * 0.55);
+
+      // Center disc reel
+      sctx.beginPath();
+      sctx.arc(cx, cy + bodyR * 0.3, bodyR * 0.18, 0, Math.PI * 2);
+      sctx.stroke();
+    } else if (kind === 86) {
+      // Etch A Sketch (stroke-only)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+
+      const boxW = s * 0.85;
+      const boxH = s * 0.75;
+      const boxX = bx + (s - boxW) / 2;
+      const boxY = by + (s - boxH) / 2;
+
+      // Main body with rounded corners
+      rectR(boxX, boxY, boxW, boxH, 4);
+
+      // Screen area
+      const screenMargin = boxW * 0.08;
+      rectR(
+        boxX + screenMargin,
+        boxY + screenMargin,
+        boxW - screenMargin * 2,
+        boxH - boxH * 0.35,
+        2
+      );
+
+      // Squiggly line inside screen (the drawing)
+      sctx.beginPath();
+      const sx = boxX + screenMargin + 4;
+      const sy = boxY + screenMargin + 6;
+      const sw = boxW - screenMargin * 2 - 8;
+      sctx.moveTo(sx, sy);
+      for (let i = 0; i <= 6; i++) {
+        const px = sx + (sw * i) / 6;
+        const py = sy + Math.sin(i * 1.2) * 4 + i * 2;
+        sctx.lineTo(px, py);
       }
-      // Left edge (no filled cell to the left)
-      if (!on(gx - 1, gy)) {
-        sctx.moveTo(x0, y1);
-        sctx.lineTo(x0, y0);
+      sctx.stroke();
+
+      // Two knobs at bottom
+      const knobY = boxY + boxH - boxH * 0.15;
+      const knobR = boxH * 0.08;
+
+      sctx.beginPath();
+      sctx.arc(boxX + boxW * 0.25, knobY, knobR, 0, Math.PI * 2);
+      sctx.arc(boxX + boxW * 0.75, knobY, knobR, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // Knob details (center dots)
+      sctx.fillRect((boxX + boxW * 0.25) | 0, knobY | 0, 1, 1);
+      sctx.fillRect((boxX + boxW * 0.75) | 0, knobY | 0, 1, 1);
+    } else if (kind === 87) {
+      // Lite-Brite (stroke-only)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
+
+      const boxW = s * 0.8;
+      const boxH = s * 0.7;
+      const boxX = bx + (s - boxW) / 2;
+      const boxY = by + (s - boxH) / 2;
+
+      // Main body
+      rectR(boxX, boxY, boxW, boxH, 3);
+
+      // Screen grid area
+      const gridX = boxX + boxW * 0.1;
+      const gridY = boxY + boxH * 0.15;
+      const gridW = boxW * 0.8;
+      const gridH = boxH * 0.6;
+
+      sctx.strokeRect(gridX, gridY, gridW, gridH);
+
+      // Grid of peg holes (5x5)
+      const rows = 5;
+      const cols = 5;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const px = gridX + (gridW * (c + 0.5)) / cols;
+          const py = gridY + (gridH * (r + 0.5)) / rows;
+          sctx.beginPath();
+          sctx.arc(px, py, 1.2, 0, Math.PI * 2);
+          sctx.stroke();
+        }
       }
-    }
-  }
 
-  sctx.stroke();
+      // Storage tray at bottom
+      line(
+        boxX + boxW * 0.15,
+        boxY + boxH - boxH * 0.15,
+        boxX + boxW * 0.85,
+        boxY + boxH - boxH * 0.15
+      );
+    } else if (kind === 88) {
+      // Jelly Shoe (stroke-only sandal)
+      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
+      const bx = (x + (w - s) / 2) | 0;
+      const by = (y + (h - s) / 2) | 0;
 
-  // sctx.restore(); // if you enabled translate(0.5, 0.5)
+      const cx = bx + s / 2;
+      const cy = by + s / 2;
+      const shoeW = s * 0.7;
+      const shoeH = s * 0.35;
 
-  sctx.lineJoin = prevJoin;
-  sctx.lineCap = prevCap;
-} else if (kind === 81) {
-  // Smiley face (stroke-only)
-  const s = Math.max(18, Math.min(w, h) * 0.64) | 0;
-  const cx = x + w / 2;
-  const cy = y + h / 2;
-  const r = s * 0.5;
-  sctx.beginPath();
-  sctx.arc(cx, cy, r, 0, Math.PI * 2);
-  sctx.stroke();
+      // Sole outline (rounded rectangle for shoe bottom)
+      const soleX = cx - shoeW / 2;
+      const soleY = cy;
+      rectR(soleX, soleY, shoeW, shoeH * 0.4, 4);
 
-  // eyes
-  const er = Math.max(2, r * 0.08);
-  sctx.beginPath();
-  sctx.arc(cx - r * 0.18, cy - r * 0.12, er, 0, Math.PI * 2);
-  sctx.arc(cx + r * 0.18, cy - r * 0.12, er, 0, Math.PI * 2);
-  sctx.stroke();
+      // Side profile upper
+      sctx.beginPath();
+      sctx.moveTo(soleX + shoeW * 0.15, soleY);
+      sctx.lineTo(soleX + shoeW * 0.15, cy - shoeH * 0.5);
+      sctx.lineTo(soleX + shoeW * 0.85, cy - shoeH * 0.5);
+      sctx.lineTo(soleX + shoeW * 0.85, soleY);
+      sctx.stroke();
 
-  // smile
-  sctx.beginPath();
-  sctx.arc(cx, cy + r * 0.08, r * 0.28, 0, Math.PI);
-  sctx.stroke();
-} else if (kind === 82) {
-  // Heart pierced with arrow (stroke-only)
-  const s = Math.max(18, Math.min(w, h) * 0.66) | 0;
-  const cx = x + w / 2;
-  const cy = y + h / 2;
-  const r = s * 0.22;
+      // Jelly shoe characteristic straps (horizontal lines)
+      for (let i = 0; i < 4; i++) {
+        const yPos = cy - shoeH * 0.45 + i * ((shoeH * 0.45) / 4);
+        line(soleX + shoeW * 0.15, yPos, soleX + shoeW * 0.85, yPos);
+      }
 
-  // heart outline
-  sctx.beginPath();
-  sctx.moveTo(cx, cy + r * 1.6);
-  sctx.bezierCurveTo(
-    cx - r * 2.2,
-    cy + r * 0.6,
-    cx - r * 2.0,
-    cy - r * 1.2,
-    cx,
-    cy - r * 0.2
-  );
-  sctx.bezierCurveTo(
-    cx + r * 2.0,
-    cy - r * 1.2,
-    cx + r * 2.2,
-    cy + r * 0.6,
-    cx,
-    cy + r * 1.6
-  );
-  sctx.stroke();
+      // T-strap
+      line(cx, cy - shoeH * 0.5, cx, cy - shoeH * 0.75);
+      line(
+        cx - shoeW * 0.2,
+        cy - shoeH * 0.75,
+        cx + shoeW * 0.2,
+        cy - shoeH * 0.75
+      );
+    } else if (kind === 89) {
+      // HAMBURGER
+      const bw = w * 0.7;
+      const bh = h * 0.15; // height of individual layers
+      const bx = x + (w - bw) / 2;
+      const by = y + h * 0.2;
 
-  // arrow
-  const ax0 = cx - r * 2.4;
-  const ay0 = cy + r * 1.8;
-  const ax1 = cx + r * 2.8;
-  const ay1 = cy - r * 1.6;
-  sctx.beginPath();
-  sctx.moveTo(ax0, ay0);
-  sctx.lineTo(ax1, ay1);
-  sctx.stroke();
+      // Top Bun (Arc)
+      sctx.beginPath();
+      sctx.arc(bx + bw / 2, by + bh, bw / 2, Math.PI, 0);
+      sctx.lineTo(bx + bw, by + bh);
+      sctx.lineTo(bx, by + bh);
+      sctx.closePath();
+      sctx.stroke();
 
-  // arrow head
-  const ah = r * 0.6;
-  const ang = Math.atan2(ay1 - ay0, ax1 - ax0);
-  sctx.beginPath();
-  sctx.moveTo(ax1, ay1);
-  sctx.lineTo(
-    ax1 - Math.cos(ang - Math.PI / 6) * ah,
-    ay1 - Math.sin(ang - Math.PI / 6) * ah
-  );
-  sctx.moveTo(ax1, ay1);
-  sctx.lineTo(
-    ax1 - Math.cos(ang + Math.PI / 6) * ah,
-    ay1 - Math.sin(ang + Math.PI / 6) * ah
-  );
-  sctx.stroke();
+      // Sesame seeds (tiny circles, not filled)
+      for(let i=0; i<4; i++) {
+        sctx.beginPath();
+        sctx.arc(bx + bw*0.3 + (i*8), by + bh*0.5, 1, 0, Math.PI*2);
+        sctx.stroke();
+      }
 
-  // fletching
-  const fx = ax0 + Math.cos(ang) * (r * 0.7);
-  const fy = ay0 + Math.sin(ang) * (r * 0.7);
-  sctx.beginPath();
-  sctx.moveTo(fx, fy);
-  sctx.lineTo(
-    fx + Math.cos(ang + Math.PI / 2) * ah * 0.7,
-    fy + Math.sin(ang + Math.PI / 2) * ah * 0.7
-  );
-  sctx.moveTo(fx, fy);
-  sctx.lineTo(
-    fx + Math.cos(ang - Math.PI / 2) * ah * 0.7,
-    fy + Math.sin(ang - Math.PI / 2) * ah * 0.7
-  );
-  sctx.stroke();
-} else if (kind === 83) {
-  // Diamond (stroke-only)
-  const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
-  const cx = x + w / 2;
-  const cy = y + h / 2;
-  const r = s * 0.5;
-  sctx.beginPath();
-  sctx.moveTo(cx, cy - r);
-  sctx.lineTo(cx + r, cy);
-  sctx.lineTo(cx, cy + r);
-  sctx.lineTo(cx - r, cy);
-  sctx.closePath();
-  sctx.stroke();
+      // Cheese (slanted line)
+      line(bx - 2, by + bh + 4, bx + bw + 2, by + bh + 4);
+      line(bx + bw + 2, by + bh + 4, bx + bw - 5, by + bh + 10);
+
+      // Patty (rounded rect outline)
+      rectR(bx + 2, by + bh + 10, bw - 4, bh, 2);
+
+      // Bottom Bun
+      rectR(bx, by + bh*2 + 10, bw, bh, 3);
+    } else if (kind === 90) {
+      // boombox (ghetto blaster)
+      const bw = Math.max(14, (w * 0.74) | 0);
+      const bh = Math.max(10, (h * 0.42) | 0);
+      const bx = (x + (w - bw) / 2) | 0;
+      const by = (y + (h - bh) / 2) | 0;
+
+      // Main body
+      rectR(bx, by, bw, bh, 3);
+
+      // Left speaker
+      sctx.beginPath();
+      sctx.arc(
+        bx + bw * 0.22,
+        by + bh * 0.56,
+        Math.max(3, (bh * 0.28) | 0),
+        0,
+        Math.PI * 2
+      );
+      sctx.stroke();
+      // Speaker inner circle
+      sctx.beginPath();
+      sctx.arc(
+        bx + bw * 0.22,
+        by + bh * 0.56,
+        Math.max(2, (bh * 0.18) | 0),
+        0,
+        Math.PI * 2
+      );
+      sctx.stroke();
+
+      // Right speaker
+      sctx.beginPath();
+      sctx.arc(
+        bx + bw * 0.78,
+        by + bh * 0.56,
+        Math.max(3, (bh * 0.28) | 0),
+        0,
+        Math.PI * 2
+      );
+      sctx.stroke();
+      // Speaker inner circle
+      sctx.beginPath();
+      sctx.arc(
+        bx + bw * 0.78,
+        by + bh * 0.56,
+        Math.max(2, (bh * 0.18) | 0),
+        0,
+        Math.PI * 2
+      );
+      sctx.stroke();
+
+      // Center cassette deck area
+      sctx.strokeRect(bx + bw * 0.38, by + 3, bw * 0.24, bh * 0.28);
+
+      // Cassette window (two circles for reels)
+      sctx.beginPath();
+      sctx.arc(bx + bw * 0.43, by + bh * 0.18, 1.5, 0, Math.PI * 2);
+      sctx.arc(bx + bw * 0.57, by + bh * 0.18, 1.5, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // Handle on top
+      sctx.beginPath();
+      sctx.arc(bx + bw * 0.5, by - 2, bw * 0.25, Math.PI * 1.1, Math.PI * 1.9);
+      sctx.stroke();
+
+      // Control buttons below cassette
+      const buttonY = by + bh * 0.38;
+      const buttonSpacing = bw * 0.06;
+      const buttonStart = bx + bw * 0.36;
+
+      for (let i = 0; i < 5; i++) {
+        sctx.fillRect(buttonStart + i * buttonSpacing, buttonY, 2, 2);
+      }
+
+      // Volume knobs/sliders on sides
+      line(bx + bw * 0.08, by + bh * 0.35, bx + bw * 0.08, by + bh * 0.75);
+      line(bx + bw * 0.92, by + bh * 0.35, bx + bw * 0.92, by + bh * 0.75);
+
+      // Antenna
+      line(bx + bw * 0.85, by, bx + bw * 0.92, by - bh * 0.45);
+
+      // EQ display bars (top section)
+      const eqX = bx + bw * 0.42;
+      const eqY = by + bh * 0.7;
+      for (let i = 0; i < 4; i++) {
+        const barH = 2 + (i % 3);
+        line(eqX + i * 3, eqY, eqX + i * 3, eqY + barH);
+      }
+    } else if (kind === 91) {
+      // PALM TREE
+      const tx = x + w / 2;
+      const ty = y + h * 0.9;
+      const trunkH = h * 0.65;
+      
+      // Curved trunk (two lines to give it some girth without filling)
+      sctx.beginPath();
+      sctx.moveTo(tx - 2, ty);
+      sctx.quadraticCurveTo(tx - w * 0.1, ty - trunkH * 0.5, tx + w * 0.03, ty - trunkH);
+      sctx.stroke();
+      sctx.beginPath();
+      sctx.moveTo(tx + 2, ty);
+      sctx.quadraticCurveTo(tx - w * 0.05, ty - trunkH * 0.5, tx + w * 0.08, ty - trunkH);
+      sctx.stroke();
+
+      const topX = tx + w * 0.05;
+      const topY = ty - trunkH;
+
+      // 5 Radiating Fronds
+      for (let i = 0; i < 5; i++) {
+        const angle = (Math.PI * 1.15) + (i * Math.PI * 0.18);
+        const fx = topX + Math.cos(angle) * (w * 0.45);
+        const fy = topY + Math.sin(angle) * (h * 0.35);
+        sctx.beginPath();
+        sctx.moveTo(topX, topY);
+        sctx.quadraticCurveTo(topX + (fx - topX) * 0.5, topY - 10, fx, fy);
+        sctx.stroke();
+      }
+    } else if (kind === 92) {
+      // SEESAW WITH TWO FIGURES
+      const cx = x + w / 2;
+      const cy = y + h * 0.7;
+      const sw = w * 0.8; // seesaw width
+      const tilt = Math.sin(fx.rand() * 10) * 5; // slight tilt for dynamics
+
+      // Center triangle base
+      sctx.beginPath();
+      sctx.moveTo(cx, cy);
+      sctx.lineTo(cx - 5, cy + 10);
+      sctx.lineTo(cx + 5, cy + 10);
+      sctx.closePath();
+      sctx.stroke();
+
+      // Main board
+      line(cx - sw / 2, cy - tilt, cx + sw / 2, cy + tilt);
+
+      // Figure Left (Stick figure)
+      const lx = cx - sw / 2 + 5;
+      const ly = cy - tilt;
+      sctx.beginPath();
+      sctx.arc(lx, ly - 12, 3, 0, Math.PI * 2); // Head
+      sctx.stroke();
+      line(lx, ly - 9, lx, ly - 2); // Body
+      line(lx, ly - 6, lx - 3, ly - 8); // Arm L
+      line(lx, ly - 6, lx + 3, ly - 8); // Arm R
+
+      // Figure Right (Stick figure)
+      const rx = cx + sw / 2 - 5;
+      const ry = cy + tilt;
+      sctx.beginPath();
+      sctx.arc(rx, ry - 12, 3, 0, Math.PI * 2); // Head
+      sctx.stroke();
+      line(rx, ry - 9, rx, ry - 2); // Body
+      line(rx, ry - 6, rx - 3, ry - 8); // Arm L
+      line(rx, ry - 6, rx + 3, ry - 8); // Arm R
     } else {
       // Fallback: tiny memphis squiggle
       const tx = (x + w * 0.18) | 0;
