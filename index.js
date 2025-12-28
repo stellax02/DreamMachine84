@@ -2001,50 +2001,58 @@ function drawBlueprint(x, y, w, h) {
       sctx.closePath();
       sctx.stroke();
     } else if (kind === 29) {
-      // Lips (pop art)
-      const bx = (x + w * 0.18) | 0;
-      const by = (y + h * 0.46) | 0;
-      const ww = Math.max(22, (w * 0.64) | 0);
-      const hh = Math.max(12, (h * 0.24) | 0);
+      // REFINED LIPS (Outline Only)
+      const bx = x + w * 0.2;
+      const by = y + h * 0.4;
+      const ww = w * 0.6;
+      const hh = h * 0.3;
 
-      // top lip
+      const midX = bx + ww / 2;
+      const midY = by + hh * 0.45; // The center "split" height
+
+      // TOP LIP (Cupid's Bow)
       sctx.beginPath();
-      sctx.moveTo(bx, by + hh * 0.55);
+      sctx.moveTo(bx, midY);
+      // Left hump of Cupid's bow
       sctx.bezierCurveTo(
-        bx + ww * 0.25,
+        bx + ww * 0.1,
         by,
-        bx + ww * 0.35,
-        by + hh * 0.25,
-        bx + ww * 0.5,
-        by + hh * 0.25
+        bx + ww * 0.4,
+        by,
+        midX,
+        by + hh * 0.2
       );
+      // Right hump of Cupid's bow
+      sctx.bezierCurveTo(bx + ww * 0.6, by, bx + ww * 0.9, by, bx + ww, midY);
+      sctx.stroke();
+
+      // BOTTOM LIP
+      sctx.beginPath();
+      sctx.moveTo(bx, midY);
+      // Single smooth deep curve for the bottom
       sctx.bezierCurveTo(
-        bx + ww * 0.65,
-        by + hh * 0.25,
-        bx + ww * 0.75,
-        by,
+        bx + ww * 0.2,
+        by + hh,
+        bx + ww * 0.8,
+        by + hh,
         bx + ww,
-        by + hh * 0.55
+        midY
       );
       sctx.stroke();
 
-      // bottom lip
+      // MOUTH SPLIT (The "smile" line)
+      // Instead of a straight line, we add a very subtle "M" shape to follow the top lip
       sctx.beginPath();
-      sctx.moveTo(bx, by + hh * 0.55);
+      sctx.moveTo(bx + ww * 0.05, midY);
       sctx.bezierCurveTo(
         bx + ww * 0.3,
-        by + hh,
+        midY - hh * 0.05,
         bx + ww * 0.7,
-        by + hh,
-        bx + ww,
-        by + hh * 0.55
+        midY - hh * 0.05,
+        bx + ww * 0.95,
+        midY
       );
       sctx.stroke();
-
-      // mouth split
-      sctx.globalAlpha = 0.55;
-      line(bx + ww * 0.18, by + hh * 0.55, bx + ww * 0.82, by + hh * 0.55);
-      sctx.globalAlpha = 1;
     } else if (kind === 30) {
       // Speech bubble "COOL"
       const bw = Math.max(26, (w * 0.68) | 0);
@@ -3818,44 +3826,51 @@ function drawBlueprint(x, y, w, h) {
         line(eqX + i * 3, eqY, eqX + i * 3, eqY + barH);
       }
     } else if (kind === 91) {
-      // PALM TREE
-      const tx = x + w / 2;
-      const ty = y + h * 0.9;
-      const trunkH = h * 0.65;
+      // PALM TREES (Outline Only)
+      const drawPalm = (ox, oy, scale) => {
+        const sw = 15 * scale; // trunk width base
+        const sh = 40 * scale; // trunk height
 
-      // Curved trunk (two lines to give it some girth without filling)
-      sctx.beginPath();
-      sctx.moveTo(tx - 2, ty);
-      sctx.quadraticCurveTo(
-        tx - w * 0.1,
-        ty - trunkH * 0.5,
-        tx + w * 0.03,
-        ty - trunkH
-      );
-      sctx.stroke();
-      sctx.beginPath();
-      sctx.moveTo(tx + 2, ty);
-      sctx.quadraticCurveTo(
-        tx - w * 0.05,
-        ty - trunkH * 0.5,
-        tx + w * 0.08,
-        ty - trunkH
-      );
-      sctx.stroke();
-
-      const topX = tx + w * 0.05;
-      const topY = ty - trunkH;
-
-      // 5 Radiating Fronds
-      for (let i = 0; i < 5; i++) {
-        const angle = Math.PI * 1.15 + i * Math.PI * 0.18;
-        const fx = topX + Math.cos(angle) * (w * 0.45);
-        const fy = topY + Math.sin(angle) * (h * 0.35);
+        // Trunk (slightly curved)
         sctx.beginPath();
-        sctx.moveTo(topX, topY);
-        sctx.quadraticCurveTo(topX + (fx - topX) * 0.5, topY - 10, fx, fy);
+        sctx.moveTo(ox - sw / 2, oy);
+        sctx.quadraticCurveTo(ox - sw / 2, oy - sh / 2, ox - 2, oy - sh); // Left side
+        sctx.lineTo(ox + 2, oy - sh); // Top
+        sctx.quadraticCurveTo(ox + sw / 2, oy - sh / 2, ox + sw / 2, oy); // Right side
         sctx.stroke();
-      }
+
+        // Leaves (Fronds) - 5 arched outlines
+        const lx = ox;
+        const ly = oy - sh;
+
+        for (let i = 0; i < 5; i++) {
+          const angle = -Math.PI + (i * Math.PI) / 4;
+          const fx = lx + Math.cos(angle) * (20 * scale);
+          const fy = ly + Math.sin(angle) * (15 * scale);
+
+          sctx.beginPath();
+          sctx.moveTo(lx, ly);
+          // Top arch of leaf
+          sctx.quadraticCurveTo(
+            lx + Math.cos(angle - 0.2) * 15 * scale,
+            ly - 10 * scale,
+            fx,
+            fy
+          );
+          // Bottom arch of leaf to create outline
+          sctx.quadraticCurveTo(
+            lx + Math.cos(angle + 0.2) * 10 * scale,
+            ly - 2 * scale,
+            lx,
+            ly
+          );
+          sctx.stroke();
+        }
+      };
+
+      // Draw two palms with slight offset and scale variation
+      drawPalm(x + w * 0.4, y + h * 0.85, 0.8); // Left smaller tree
+      drawPalm(x + w * 0.65, y + h * 0.9, 1.0); // Right main tree
     } else if (kind === 92) {
       // SEESAW WITH TWO FIGURES
       const cx = x + w / 2;
