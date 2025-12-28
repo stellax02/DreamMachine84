@@ -637,7 +637,7 @@ const KNIGHT = [
 // Shuffle-bag helpers (even frequency / no repeats until cycle)
 // ---------------------------
 
-const SYMBOL_COUNT = 93;
+const SYMBOL_COUNT = 98;
 let symbolBag = [];
 function nextSymbolKind() {
   if (!symbolBag.length) {
@@ -3520,36 +3520,22 @@ function drawBlueprint(x, y, w, h) {
 
       sctx.stroke();
     } else if (kind === 84) {
-      // Slap Bracelet (stroke-only)
-      const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
-      const bx = (x + (w - s) / 2) | 0;
-      const by = (y + (h - s) / 2) | 0;
+      // HOUSE
+      const bx = x + w * 0.2; // base x
+      const by = y + h * 0.8; // base y
+      const hw = w * 0.6; // house width
+      const hh = h * 0.4; // house height
 
-      const cx = bx + s / 2;
-      const cy = by + s / 2;
-      const bandW = s * 0.8;
-      const bandH = s * 0.15;
-
-      // Curved bracelet band
+      // Main structure
+      sctx.strokeRect(bx, by - hh, hw, hh);
+      // Roof
       sctx.beginPath();
-      sctx.arc(cx, cy, bandW * 0.45, Math.PI * 0.3, Math.PI * 1.7);
+      sctx.moveTo(bx, by - hh);
+      sctx.lineTo(bx + hw / 2, by - hh - 15);
+      sctx.lineTo(bx + hw, by - hh);
       sctx.stroke();
-
-      sctx.beginPath();
-      sctx.arc(cx, cy, bandW * 0.35, Math.PI * 0.3, Math.PI * 1.7);
-      sctx.stroke();
-
-      // Decorative pattern lines
-      for (let i = 0; i < 5; i++) {
-        const angle = Math.PI * 0.5 + i * 0.25;
-        const r1 = bandW * 0.35;
-        const r2 = bandW * 0.45;
-        const x1 = cx + Math.cos(angle) * r1;
-        const y1 = cy + Math.sin(angle) * r1;
-        const x2 = cx + Math.cos(angle) * r2;
-        const y2 = cy + Math.sin(angle) * r2;
-        line(x1, y1, x2, y2);
-      }
+      // Door
+      sctx.strokeRect(bx + hw / 2 - 4, by - 12, 8, 12);
     } else if (kind === 85) {
       // View-Master (stroke-only)
       const s = Math.max(18, Math.min(w, h) * 0.62) | 0;
@@ -3727,9 +3713,9 @@ function drawBlueprint(x, y, w, h) {
       sctx.stroke();
 
       // Sesame seeds (tiny circles, not filled)
-      for(let i=0; i<4; i++) {
+      for (let i = 0; i < 4; i++) {
         sctx.beginPath();
-        sctx.arc(bx + bw*0.3 + (i*8), by + bh*0.5, 1, 0, Math.PI*2);
+        sctx.arc(bx + bw * 0.3 + i * 8, by + bh * 0.5, 1, 0, Math.PI * 2);
         sctx.stroke();
       }
 
@@ -3741,7 +3727,7 @@ function drawBlueprint(x, y, w, h) {
       rectR(bx + 2, by + bh + 10, bw - 4, bh, 2);
 
       // Bottom Bun
-      rectR(bx, by + bh*2 + 10, bw, bh, 3);
+      rectR(bx, by + bh * 2 + 10, bw, bh, 3);
     } else if (kind === 90) {
       // boombox (ghetto blaster)
       const bw = Math.max(14, (w * 0.74) | 0);
@@ -3836,15 +3822,25 @@ function drawBlueprint(x, y, w, h) {
       const tx = x + w / 2;
       const ty = y + h * 0.9;
       const trunkH = h * 0.65;
-      
+
       // Curved trunk (two lines to give it some girth without filling)
       sctx.beginPath();
       sctx.moveTo(tx - 2, ty);
-      sctx.quadraticCurveTo(tx - w * 0.1, ty - trunkH * 0.5, tx + w * 0.03, ty - trunkH);
+      sctx.quadraticCurveTo(
+        tx - w * 0.1,
+        ty - trunkH * 0.5,
+        tx + w * 0.03,
+        ty - trunkH
+      );
       sctx.stroke();
       sctx.beginPath();
       sctx.moveTo(tx + 2, ty);
-      sctx.quadraticCurveTo(tx - w * 0.05, ty - trunkH * 0.5, tx + w * 0.08, ty - trunkH);
+      sctx.quadraticCurveTo(
+        tx - w * 0.05,
+        ty - trunkH * 0.5,
+        tx + w * 0.08,
+        ty - trunkH
+      );
       sctx.stroke();
 
       const topX = tx + w * 0.05;
@@ -3852,7 +3848,7 @@ function drawBlueprint(x, y, w, h) {
 
       // 5 Radiating Fronds
       for (let i = 0; i < 5; i++) {
-        const angle = (Math.PI * 1.15) + (i * Math.PI * 0.18);
+        const angle = Math.PI * 1.15 + i * Math.PI * 0.18;
         const fx = topX + Math.cos(angle) * (w * 0.45);
         const fy = topY + Math.sin(angle) * (h * 0.35);
         sctx.beginPath();
@@ -3897,6 +3893,113 @@ function drawBlueprint(x, y, w, h) {
       line(rx, ry - 9, rx, ry - 2); // Body
       line(rx, ry - 6, rx - 3, ry - 8); // Arm L
       line(rx, ry - 6, rx + 3, ry - 8); // Arm R
+    } else if (kind === 93) {
+      // ROBOT
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+
+      // Head
+      sctx.strokeRect(cx - 6, cy - 20, 12, 10);
+      // Antenna
+      line(cx, cy - 20, cx, cy - 24);
+      sctx.beginPath();
+      sctx.arc(cx, cy - 25, 1, 0, Math.PI * 2);
+      sctx.stroke();
+      // Body
+      sctx.strokeRect(cx - 10, cy - 10, 20, 18);
+      // Arms
+      line(cx - 10, cy - 5, cx - 15, cy + 2);
+      line(cx + 10, cy - 5, cx + 15, cy + 2);
+      // Legs
+      line(cx - 5, cy + 8, cx - 5, cy + 15);
+      line(cx + 5, cy + 8, cx + 5, cy + 15);
+    } else if (kind === 94) {
+      // ROCKET
+      const cx = x + w / 2;
+      const cy = y + h * 0.8;
+
+      // Body (Capsule shape)
+      sctx.beginPath();
+      sctx.moveTo(cx - 6, cy);
+      sctx.lineTo(cx - 6, cy - 20);
+      sctx.quadraticCurveTo(cx, cy - 35, cx + 6, cy - 20);
+      sctx.lineTo(cx + 6, cy);
+      sctx.closePath();
+      sctx.stroke();
+      // Fins
+      line(cx - 6, cy - 5, cx - 12, cy);
+      line(cx + 6, cy - 5, cx + 12, cy);
+      // Window
+      sctx.beginPath();
+      sctx.arc(cx, cy - 18, 3, 0, Math.PI * 2);
+      sctx.stroke();
+    } else if (kind === 95) {
+      // FLOWER
+      const cx = x + w / 2;
+      const cy = y + h * 0.7;
+
+      // Stem
+      line(cx, cy, cx, cy - 20);
+      // Leaf
+      sctx.beginPath();
+      sctx.ellipse(cx + 4, cy - 8, 5, 2, Math.PI / 4, 0, Math.PI * 2);
+      sctx.stroke();
+      // Center
+      sctx.beginPath();
+      sctx.arc(cx, cy - 20, 3, 0, Math.PI * 2);
+      sctx.stroke();
+      // Petals (Simple 4-loop)
+      for (let i = 0; i < 4; i++) {
+        const angle = (i * Math.PI) / 2;
+        sctx.beginPath();
+        sctx.arc(
+          cx + Math.cos(angle) * 5,
+          cy - 20 + Math.sin(angle) * 5,
+          4,
+          0,
+          Math.PI * 2
+        );
+        sctx.stroke();
+      }
+    } else if (kind === 96) {
+      // WALL CLOCK
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+
+      // Outer Circle
+      sctx.beginPath();
+      sctx.arc(cx, cy, 18, 0, Math.PI * 2);
+      sctx.stroke();
+      // Hands
+      line(cx, cy, cx, cy - 10); // Hour
+      line(cx, cy, cx + 8, cy + 2); // Minute
+      // Small ticks
+      line(cx, cy - 18, cx, cy - 15);
+      line(cx + 18, cy, cx + 15, cy);
+    } else if (kind === 97) {
+      // COOL S (Graffiti S)
+      const cx = x + w / 2 - 8;
+      const cy = y + h / 2 - 15;
+      const sp = 8; // spacing
+
+      // Six vertical lines
+      line(cx, cy, cx, cy + 10);
+      line(cx + sp, cy, cx + sp, cy + 10);
+      line(cx + sp * 2, cy, cx + sp * 2, cy + 10);
+
+      line(cx, cy + 15, cx, cy + 25);
+      line(cx + sp, cy + 15, cx + sp, cy + 25);
+      line(cx + sp * 2, cy + 15, cx + sp * 2, cy + 25);
+
+      // Top point
+      line(cx, cy, cx + sp, cy - 8);
+      line(cx + sp, cy - 8, cx + sp * 2, cy);
+      // Bottom point
+      line(cx, cy + 25, cx + sp, cy + 33);
+      line(cx + sp, cy + 33, cx + sp * 2, cy + 25);
+      // Diagonal connections
+      line(cx, cy + 10, cx + sp, cy + 15);
+      line(cx + sp, cy + 10, cx + sp * 2, cy + 15);
     } else {
       // Fallback: tiny memphis squiggle
       const tx = (x + w * 0.18) | 0;
