@@ -637,7 +637,7 @@ const KNIGHT = [
 // Shuffle-bag helpers (even frequency / no repeats until cycle)
 // ---------------------------
 
-const SYMBOL_COUNT = 98;
+const SYMBOL_COUNT = 100;
 let symbolBag = [];
 function nextSymbolKind() {
   if (!symbolBag.length) {
@@ -922,7 +922,7 @@ const PHRASES_80S_DESIGN = [
   "FLAMINGO INN",
   "ELECTRIC BLUE",
   "HOT PINK",
-  "PAC-MAN",
+  "P A C - M A N",
   "CABLE TV",
   "HAIR GEL",
   "WIND-BREAKER",
@@ -943,6 +943,7 @@ const PHRASES_80S_DESIGN = [
   "SCHOOL LOCKER",
   "NEON SUNSET",
   "SEXY SAX",
+  "LUNCH BOX",
   "CHERRY COLA",
   "JELLY SHOES",
   "SKITTLES",
@@ -971,7 +972,7 @@ const PHRASES_80S_DESIGN = [
   "REC ●",
   "PSYCH!",
   "WHOA!",
-  "BAM!",
+  "B A M !",
   "LIKE, TOTALLY",
   "BODACIOUS",
   "CHILL PILL",
@@ -1020,7 +1021,7 @@ const PHRASES_80S_HOOKS = [
   "BLUE MONDAY",
   "MEN AT WORK",
   "HUNGRY LIKE THE WOLF",
-  "RIO",
+  "R I O",
   "THE FINAL COUNTDOWN",
   "EYE OF THE TIGER",
   "THE POWER OF LOVE",
@@ -4015,6 +4016,68 @@ function drawBlueprint(x, y, w, h) {
       // Diagonal connections
       line(cx, cy + 10, cx + sp, cy + 15);
       line(cx + sp, cy + 10, cx + sp * 2, cy + 15);
+    } else if (kind === 98) {
+      // ARCHED M (Logo style)
+      const bx = x + w * 0.15;
+      const by = y + h * 0.8;
+      const mw = w * 0.7;
+      const mh = h * 0.6;
+
+      sctx.beginPath();
+      // Start bottom left
+      sctx.moveTo(bx, by);
+      // Left Arch
+      sctx.bezierCurveTo(
+        bx,
+        by - mh * 1.2,
+        bx + mw * 0.45,
+        by - mh * 1.2,
+        bx + mw * 0.5,
+        by - mh * 0.1
+      );
+      // Right Arch
+      sctx.bezierCurveTo(
+        bx + mw * 0.55,
+        by - mh * 1.2,
+        bx + mw,
+        by - mh * 1.2,
+        bx + mw,
+        by
+      );
+      sctx.stroke();
+    } else if (kind === 99) {
+      // ONE EYE WITH A TEAR
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      const ew = w * 0.6;
+      const eh = h * 0.3;
+
+      // Eye Outline (Almond shape)
+      sctx.beginPath();
+      sctx.moveTo(cx - ew / 2, cy);
+      sctx.quadraticCurveTo(cx, cy - eh, cx + ew / 2, cy); // Top lid
+      sctx.quadraticCurveTo(cx, cy + eh, cx - ew / 2, cy); // Bottom lid
+      sctx.stroke();
+
+      // Iris (Circle)
+      sctx.beginPath();
+      sctx.arc(cx, cy, eh * 0.6, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // Pupil (Smaller circle)
+      sctx.beginPath();
+      sctx.arc(cx, cy, eh * 0.2, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // The Tear
+      const tx = cx + ew * 0.25; // Offset to the side
+      const ty = cy + eh * 0.5; // Starting at the bottom lid
+
+      sctx.beginPath();
+      sctx.moveTo(tx, ty);
+      // Teardrop shape
+      sctx.bezierCurveTo(tx - 8, ty + 15, tx + 8, ty + 15, tx, ty);
+      sctx.stroke();
     } else {
       // Fallback: tiny memphis squiggle
       const tx = (x + w * 0.18) | 0;
