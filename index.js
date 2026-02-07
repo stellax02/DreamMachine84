@@ -846,7 +846,7 @@ const PHRASES_ORIGINAL = [
   "PIXEL SERMON",
   "ELECTRIC LULLABY",
   "SPECTRAL SCHEMATICS",
-  "ANALOG GLOW",
+  "A N A L O G   G L O W",
   "NEON GRID HORIZON",
   "VECTOR WIREFRAME",
   "TERMINAL // GREEN",
@@ -867,14 +867,13 @@ const PHRASES_80S_DESIGN = [
   "VHS TRACKING",
   "TRACKING...",
   "SCANLINES // ON",
-  "PAL / NTSC",
   "CATHODE RAY",
   "CRT PHOSPHOR",
   "CHROME TYPE",
   "CASSETTE TAPE",
   "SIDE A / SIDE B",
   "AUTO-REVERSE",
-  "TAPE HISS",
+  "T A P E  H I S S",
   "CASSETTE CLICK",
   "VINYL CRACKLE",
   "SPACE INVADERS",
@@ -891,7 +890,7 @@ const PHRASES_80S_DESIGN = [
   "BEEPER // PAGER",
   "POCKET CALCULATOR",
   "DOT-MATRIX PRINT",
-  "DIAL TONE",
+  "D I A L  T O N E",
   "INSERT COIN",
   "SYNTH POP",
   "ARCADE // HI-SCORE",
@@ -918,7 +917,6 @@ const PHRASES_80S_DESIGN = [
   "SEQUINS",
   "HAIRSPRAY CLOUD",
   "BEACH PARTY",
-  "BLACK LIGHT",
   "FLAMINGO INN",
   "ELECTRIC BLUE",
   "HOT PINK",
@@ -932,7 +930,7 @@ const PHRASES_80S_DESIGN = [
   "NINTENDO",
   "COMMODORE 64",
   "DONKEY KONG",
-  "FANNY PACK",
+  "F A N N Y  P A C K",
   "ROLLER RINK",
   "CAPRI SUN",
   "PLASTIC WATCH",
@@ -976,7 +974,7 @@ const PHRASES_80S_DESIGN = [
   "LIKE, TOTALLY",
   "BODACIOUS",
   "CHILL PILL",
-  "FRESH",
+  "F R E S H",
   "RELAX",
   "DON'T PANIC",
   "YUPPIE",
@@ -1007,16 +1005,21 @@ const PHRASES_80S_HOOKS = [
   "DON'T STOP BELIEVIN'",
   "TAKE ME OUT TONIGHT",
   "CLUB TROPICANA",
+  "ETERNAL FLAME",
+  "THE B E S T",
+  "FREE FALLIN'",
+  "BETTE DAVIS EYES",
   "99 LUFTBALLONS",
   "KIDS IN AMERICA",
   "DANGER ZONE",
   "DON'T YOU WANT ME",
   "ALL I EVER KNEW ONLY YOU",
+  "D R I V E  M E  C R A Z Y",
   "TAINTED LOVE",
   "I'M YOUR VENUS",
   "MODERN LOVE",
   "SUPER FREAK",
-  "KISS",
+  "K I S S",
   "BAD",
   "BLUE MONDAY",
   "MEN AT WORK",
@@ -1030,7 +1033,7 @@ const PHRASES_80S_HOOKS = [
   "TAKE MY BREATH AWAY",
   "TRUE COLORS",
   "KENNY G",
-  "MOONWALK",
+  "M O O N W A L K",
   "SMOOTH OPERATOR",
   "LAST CHRISTMAS",
   "BACK TO THE FUTURE",
@@ -1043,12 +1046,12 @@ const PHRASES_80S_HOOKS = [
   "BEVERLY HILLS COP",
   "TOP GUN",
   "ZOO STATION",
-  "DURAN DURAN",
   "A-HA",
   "WORKING GIRL",
   "THE KARATE KID",
   "WALL STREET",
   "DIRTY DANCING",
+  "STAR WARS",
   "FOOTLOOSE",
   "WAX ON",
   "WAX OFF",
@@ -1081,6 +1084,7 @@ const PHRASES_80S_HOOKS = [
   "IT'S SHOWTIME!",
   "GREED IS GOOD",
   "JUST SAY NO",
+  "GENDER G A P",
   "STAND BY ME",
   "I WANT MY MTV",
 ];
@@ -2244,20 +2248,44 @@ function drawBlueprint(x, y, w, h) {
       );
       drawMiniLabel("TURBO", left + 2, top - 7);
     } else if (kind === 38) {
-      // Pacifier badge / sticker
-      const cx = (x + w * 0.52) | 0;
-      const cy = (y + h * 0.54) | 0;
-      // ring
+      // REFINED BABY PACIFIER (Based on image_0b1001.png)
+      const cx = x + w * 0.5;
+      const cy = y + h * 0.5;
+
+      sctx.save();
+      // Apply a slight rotation to match the "tilted" look of the source image
+      sctx.translate(cx, cy);
+      sctx.rotate(-Math.PI / 8);
+
+      // 1. NIPPLE (Large bulbous top)
       sctx.beginPath();
-      sctx.arc(cx, cy + 6, 5.2, 0, Math.PI * 2);
+      sctx.moveTo(-4, -5);
+      // Drawing the rounded bulb
+      sctx.bezierCurveTo(-12, -25, 12, -25, 4, -5);
       sctx.stroke();
-      // shield
-      rectR(cx - 8, cy - 2, 16, 10, 4);
-      // nipple
+
+      // 2. SHIELD (Angled ellipse)
       sctx.beginPath();
-      sctx.arc(cx, cy - 1, 3.0, 0, Math.PI * 2);
+      sctx.ellipse(0, 0, 18, 8, 0, 0, Math.PI * 2);
       sctx.stroke();
-      drawMiniLabel("BABY", cx - 8, cy - 12);
+
+      // Ventilation holes in shield
+      sctx.beginPath();
+      sctx.arc(-10, 0, 2, 0, Math.PI * 2);
+      sctx.stroke();
+      sctx.beginPath();
+      sctx.arc(10, 0, 2, 0, Math.PI * 2);
+      sctx.stroke();
+
+      // 3. HANDLE RING (Large bottom ring)
+      sctx.beginPath();
+      sctx.arc(0, 12, 9, 0, Math.PI * 2);
+      sctx.stroke();
+
+      sctx.restore();
+
+      // Keep your label if desired
+      drawMiniLabel("BABY", x + w * 0.35, y + h * 0.2);
     } else if (kind === 39) {
       // Horn hand sign (rock 🤘)
       const cx = (x + w * 0.52) | 0;
@@ -3535,14 +3563,19 @@ function drawBlueprint(x, y, w, h) {
       const hw = w * 0.6; // house width
       const hh = h * 0.4; // house height
 
+      // Chimney (Added on the left slope of the roof)
+      sctx.strokeRect(bx + 6, by - hh - 12, 6, 10);
+
       // Main structure
       sctx.strokeRect(bx, by - hh, hw, hh);
+
       // Roof
       sctx.beginPath();
       sctx.moveTo(bx, by - hh);
       sctx.lineTo(bx + hw / 2, by - hh - 15);
       sctx.lineTo(bx + hw, by - hh);
       sctx.stroke();
+
       // Door
       sctx.strokeRect(bx + hw / 2 - 4, by - 12, 8, 12);
     } else if (kind === 85) {
@@ -3649,8 +3682,8 @@ function drawBlueprint(x, y, w, h) {
       sctx.strokeRect(gridX, gridY, gridW, gridH);
 
       // Grid of peg holes (5x5)
-      const rows = 5;
-      const cols = 5;
+      const rows = 3;
+      const cols = 3;
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const px = gridX + (gridW * (c + 0.5)) / cols;
@@ -3826,52 +3859,51 @@ function drawBlueprint(x, y, w, h) {
         const barH = 2 + (i % 3);
         line(eqX + i * 3, eqY, eqX + i * 3, eqY + barH);
       }
-    } else if (kind === 91) {
-      // PALM TREES (Outline Only)
-      const drawPalm = (ox, oy, scale) => {
-        const sw = 15 * scale; // trunk width base
-        const sh = 40 * scale; // trunk height
+    } else if (kind === 99) {
+      // 8-BIT ROUNDED PALM TREE (Based on image_0be1c1.png)
+      const cx = (x + w * 0.5) | 0;
+      const cy = (y + h * 0.9) | 0;
 
-        // Trunk (slightly curved)
-        sctx.beginPath();
-        sctx.moveTo(ox - sw / 2, oy);
-        sctx.quadraticCurveTo(ox - sw / 2, oy - sh / 2, ox - 2, oy - sh); // Left side
-        sctx.lineTo(ox + 2, oy - sh); // Top
-        sctx.quadraticCurveTo(ox + sw / 2, oy - sh / 2, ox + sw / 2, oy); // Right side
-        sctx.stroke();
+      // 1. Trunk (Slender, blocky vertical)
+      line(cx - 1, cy, cx - 1, cy - 25);
+      line(cx + 1, cy, cx + 1, cy - 25);
+      line(cx - 1, cy - 25, cx + 1, cy - 25); // Cap top
 
-        // Leaves (Fronds) - 5 arched outlines
-        const lx = ox;
-        const ly = oy - sh;
+      // 2. Base/Island (Small blocky mound)
+      line(cx - 8, cy, cx + 8, cy); // Ground
+      line(cx - 8, cy, cx - 6, cy - 2);
+      line(cx + 8, cy, cx + 6, cy - 2);
+      line(cx - 6, cy - 2, cx + 6, cy - 2);
 
-        for (let i = 0; i < 5; i++) {
-          const angle = -Math.PI + (i * Math.PI) / 4;
-          const fx = lx + Math.cos(angle) * (20 * scale);
-          const fy = ly + Math.sin(angle) * (15 * scale);
+      // 3. Fronds/Leaves (8-bit "rounded" explosion)
+      const tx = cx;
+      const ty = cy - 25;
 
-          sctx.beginPath();
-          sctx.moveTo(lx, ly);
-          // Top arch of leaf
-          sctx.quadraticCurveTo(
-            lx + Math.cos(angle - 0.2) * 15 * scale,
-            ly - 10 * scale,
-            fx,
-            fy
-          );
-          // Bottom arch of leaf to create outline
-          sctx.quadraticCurveTo(
-            lx + Math.cos(angle + 0.2) * 10 * scale,
-            ly - 2 * scale,
-            lx,
-            ly
-          );
-          sctx.stroke();
-        }
+      // Top leaf (Rounded tip)
+      line(tx - 2, ty - 6, tx + 2, ty - 6);
+      line(tx - 2, ty - 6, tx - 4, ty - 4);
+      line(tx + 2, ty - 6, tx + 4, ty - 4);
+      line(tx - 4, ty - 4, tx, ty);
+      line(tx + 4, ty - 4, tx, ty);
+
+      // Side leaves (Left & Right)
+      const drawSideLeaf = (dir) => {
+        line(tx + dir * 4, ty, tx + dir * 12, ty - 2); // Top edge
+        line(tx + dir * 12, ty - 2, tx + dir * 14, ty + 2); // Outer point
+        line(tx + dir * 14, ty + 2, tx + dir * 8, ty + 4); // Bottom edge
+        line(tx + dir * 8, ty + 4, tx, ty); // Return
       };
+      drawSideLeaf(-1); // Left
+      drawSideLeaf(1); // Right
 
-      // Draw two palms with slight offset and scale variation
-      drawPalm(x + w * 0.4, y + h * 0.85, 0.8); // Left smaller tree
-      drawPalm(x + w * 0.65, y + h * 0.9, 1.0); // Right main tree
+      // Lower hanging leaves
+      const drawBottomLeaf = (dir) => {
+        line(tx, ty, tx + dir * 6, ty + 8);
+        line(tx + dir * 6, ty + 8, tx + dir * 2, ty + 12);
+        line(tx + dir * 2, ty + 12, tx, ty);
+      };
+      drawBottomLeaf(-1);
+      drawBottomLeaf(1);
     } else if (kind === 92) {
       // SEESAW WITH TWO FIGURES
       const cx = x + w / 2;
@@ -3956,14 +3988,17 @@ function drawBlueprint(x, y, w, h) {
 
       // Stem
       line(cx, cy, cx, cy - 20);
-      // Leaf
+
+      // Leaf (Original position, but rotated -Math.PI/4 to stem from the line)
       sctx.beginPath();
-      sctx.ellipse(cx + 4, cy - 8, 5, 2, Math.PI / 4, 0, Math.PI * 2);
+      sctx.ellipse(cx + 4, cy - 8, 5, 2, -Math.PI / 4, 0, Math.PI * 2);
       sctx.stroke();
+
       // Center
       sctx.beginPath();
       sctx.arc(cx, cy - 20, 3, 0, Math.PI * 2);
       sctx.stroke();
+
       // Petals (Simple 4-loop)
       for (let i = 0; i < 4; i++) {
         const angle = (i * Math.PI) / 2;
@@ -4016,35 +4051,28 @@ function drawBlueprint(x, y, w, h) {
       // Diagonal connections
       line(cx, cy + 10, cx + sp, cy + 15);
       line(cx + sp, cy + 10, cx + sp * 2, cy + 15);
-    } else if (kind === 98) {
-      // ARCHED M (Logo style)
-      const bx = x + w * 0.15;
-      const by = y + h * 0.8;
-      const mw = w * 0.7;
-      const mh = h * 0.6;
-
-      sctx.beginPath();
-      // Start bottom left
-      sctx.moveTo(bx, by);
-      // Left Arch
-      sctx.bezierCurveTo(
-        bx,
-        by - mh * 1.2,
-        bx + mw * 0.45,
-        by - mh * 1.2,
-        bx + mw * 0.5,
-        by - mh * 0.1
-      );
-      // Right Arch
-      sctx.bezierCurveTo(
-        bx + mw * 0.55,
-        by - mh * 1.2,
-        bx + mw,
-        by - mh * 1.2,
-        bx + mw,
-        by
-      );
-      sctx.stroke();
+    } else if (kind === 118) {
+      // SHUTTER SHADES (Simplified from image_914b69.png)
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      // Frame Outlines
+      const drawLens = (lx) => {
+        sctx.beginPath();
+        sctx.moveTo(lx - 15, cy - 6);
+        sctx.lineTo(lx + 15, cy - 6);
+        sctx.lineTo(lx + 12, cy + 8);
+        sctx.lineTo(lx - 12, cy + 8);
+        sctx.closePath();
+        sctx.stroke();
+        // Shutter lines (Horizontal)
+        for (let i = 1; i < 4; i++) {
+          line(lx - 14 + i, cy - 6 + i * 3.5, lx + 14 - i, cy - 6 + i * 3.5);
+        }
+      };
+      drawLens(cx - 17);
+      drawLens(cx + 17);
+      // Bridge
+      line(cx - 2, cy - 3, cx + 2, cy - 3);
     } else if (kind === 99) {
       // ONE EYE WITH A TEAR
       const cx = x + w / 2;
@@ -4078,6 +4106,226 @@ function drawBlueprint(x, y, w, h) {
       // Teardrop shape
       sctx.bezierCurveTo(tx - 8, ty + 15, tx + 8, ty + 15, tx, ty);
       sctx.stroke();
+    } else if (kind === 100) {
+      // STOCK EXCHANGE GRAPH
+      const bx = x + w * 0.2;
+      const by = y + h * 0.8;
+      // Axes
+      line(bx, by, bx + w * 0.6, by); // X
+      line(bx, by, bx, by - h * 0.6); // Y
+      // Volatile line
+      sctx.beginPath();
+      sctx.moveTo(bx, by - 5);
+      sctx.lineTo(bx + 10, by - 25);
+      sctx.lineTo(bx + 20, by - 15);
+      sctx.lineTo(bx + 30, by - 40);
+      sctx.lineTo(bx + 40, by - 35);
+      sctx.lineTo(bx + 50, by - 55);
+      sctx.stroke();
+    } else if (kind === 101) {
+      // MOTOR YACHT
+      const bx = x + w * 0.1;
+      const by = y + h * 0.75;
+      // Hull
+      sctx.beginPath();
+      sctx.moveTo(bx, by);
+      sctx.lineTo(bx + w * 0.8, by); // Deck
+      sctx.lineTo(bx + w * 0.65, by + 12); // Stern
+      sctx.lineTo(bx + 5, by + 12); // Bottom
+      sctx.closePath();
+      sctx.stroke();
+      // Cabin structure
+      sctx.strokeRect(bx + 20, by - 12, w * 0.35, 12);
+      line(bx + 20 + w * 0.35, by - 12, bx + 20 + w * 0.45, by); // Sleek windshield
+    } else if (kind === 102) {
+      // FLOWER HEAD ONLY (Based on image_913c28.png)
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      // Center circle
+      sctx.beginPath();
+      sctx.arc(cx, cy, 6, 0, Math.PI * 2);
+      sctx.stroke();
+      // 5 Large round petals
+      for (let i = 0; i < 5; i++) {
+        const ang = (i * 2 * Math.PI) / 5;
+        const px = cx + Math.cos(ang) * 12;
+        const py = cy + Math.sin(ang) * 12;
+        sctx.beginPath();
+        sctx.arc(px, py, 9, 0, Math.PI * 2);
+        sctx.stroke();
+      }
+    } else if (kind === 103) {
+      // ICE CREAM CONE
+      const cx = x + w / 2;
+      const cy = y + h * 0.45;
+      // Scoop
+      sctx.beginPath();
+      sctx.arc(cx, cy, 10, 0, Math.PI * 2);
+      sctx.stroke();
+      // Cone
+      sctx.beginPath();
+      sctx.moveTo(cx - 10, cy + 2);
+      sctx.lineTo(cx, cy + 30);
+      sctx.lineTo(cx + 10, cy + 2);
+      sctx.stroke();
+      // Waffle lines
+      line(cx - 4, cy + 12, cx + 4, cy + 12);
+    } else if (kind === 104) {
+      // BOWLING (Pin and Ball)
+      const cx = x + w / 2;
+      const cy = y + h * 0.8;
+      // Pin Outline
+      sctx.beginPath();
+      sctx.moveTo(cx - 3, cy - 30);
+      sctx.quadraticCurveTo(cx, cy - 33, cx + 3, cy - 30); // Top
+      sctx.lineTo(cx + 2, cy - 20); // Neck
+      sctx.quadraticCurveTo(cx + 10, cy - 10, cx + 5, cy); // Base Right
+      sctx.lineTo(cx - 5, cy); // Base
+      sctx.quadraticCurveTo(cx - 10, cy - 10, cx - 2, cy - 20); // Base Left
+      sctx.closePath();
+      sctx.stroke();
+      // Ball Outline
+      sctx.beginPath();
+      sctx.arc(cx + 15, cy - 6, 6, 0, Math.PI * 2);
+      sctx.stroke();
+      // Three holes
+      for (let i = 0; i < 3; i++) {
+        const a = (i * Math.PI * 2) / 3;
+        sctx.beginPath();
+        sctx.arc(
+          cx + 15 + Math.cos(a) * 2,
+          cy - 6 + Math.sin(a) * 2,
+          0.8,
+          0,
+          Math.PI * 2
+        );
+        sctx.stroke();
+      }
+    } else if (kind === 105) {
+      // PILLS (Based on image_9134c4.png)
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      const drawPill = (px, py, ang) => {
+        sctx.save();
+        sctx.translate(px, py);
+        sctx.rotate(ang);
+        // Capsule body
+        sctx.beginPath();
+        sctx.arc(-6, 0, 6, Math.PI / 2, -Math.PI / 2);
+        sctx.lineTo(6, -6);
+        sctx.arc(6, 0, 6, -Math.PI / 2, Math.PI / 2);
+        sctx.closePath();
+        sctx.stroke();
+        // Separation line
+        line(0, -6, 0, 6);
+        // Small "shine" detail (outline)
+        sctx.beginPath();
+        sctx.arc(-7, -2, 1, 0, Math.PI * 2);
+        sctx.stroke();
+        sctx.restore();
+      };
+      drawPill(cx - 5, cy - 5, -Math.PI / 4);
+      drawPill(cx + 8, cy + 5, Math.PI / 8);
+    } else if (kind === 106) {
+      // DIAMOND RING (80s Power Symbol)
+      const cx = x + w / 2;
+      const cy = y + h * 0.6;
+      // The Ring
+      sctx.beginPath();
+      sctx.arc(cx, cy + 5, 8, 0, Math.PI * 2);
+      sctx.stroke();
+      // The Diamond (Angular outline)
+      sctx.beginPath();
+      sctx.moveTo(cx - 6, cy - 2);
+      sctx.lineTo(cx + 6, cy - 2);
+      sctx.lineTo(cx + 10, cy - 8);
+      sctx.lineTo(cx, cy - 18);
+      sctx.lineTo(cx - 10, cy - 8);
+      sctx.closePath();
+      sctx.stroke();
+      // Interior facet line
+      line(cx - 6, cy - 2, cx - 10, cy - 8);
+      line(cx + 6, cy - 2, cx + 10, cy - 8);
+    } else if (kind === 107) {
+      // R2-D2 (8-bit style)
+      const cx = x + w / 2;
+      const cy = y + h * 0.8;
+      // Dome top
+      sctx.beginPath();
+      sctx.arc(cx, cy - 20, 8, Math.PI, 0);
+      sctx.stroke();
+      // Body
+      sctx.strokeRect(cx - 8, cy - 20, 16, 18);
+      // Legs
+      sctx.strokeRect(cx - 12, cy - 18, 4, 18); // Left
+      sctx.strokeRect(cx + 8, cy - 18, 4, 18); // Right
+      // Eye/Lens detail
+      sctx.beginPath();
+      sctx.arc(cx, cy - 23, 2, 0, Math.PI * 2);
+      sctx.stroke();
+    } else if (kind === 108) {
+      // CLOUD (Rounded 8-bit)
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      // Bottom flat edge
+      line(cx - 12, cy + 4, cx + 12, cy + 4);
+      // Three "bumps"
+      sctx.beginPath();
+      sctx.arc(cx - 8, cy, 6, Math.PI, Math.PI * 1.5);
+      sctx.stroke();
+      sctx.beginPath();
+      sctx.arc(cx, cy - 4, 8, Math.PI, 0);
+      sctx.stroke();
+      sctx.beginPath();
+      sctx.arc(cx + 8, cy, 6, Math.PI * 1.5, 0);
+      sctx.stroke();
+    } else if (kind === 109) {
+      // BALL (Beach/Sports ball with sections)
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      sctx.beginPath();
+      sctx.arc(cx, cy, 15, 0, Math.PI * 2);
+      sctx.stroke();
+      // Internal section lines
+      sctx.beginPath();
+      sctx.ellipse(cx, cy, 5, 15, 0, 0, Math.PI * 2);
+      sctx.stroke();
+      line(cx - 15, cy, cx + 15, cy);
+    } else if (kind === 110) {
+      // MARTINI GLASS
+      const cx = x + w / 2;
+      const cy = y + h * 0.8;
+      // Stem and Base
+      line(cx, cy, cx, cy - 15);
+      line(cx - 8, cy, cx + 8, cy);
+      // Triangle Bowl
+      sctx.beginPath();
+      sctx.moveTo(cx, cy - 15);
+      sctx.lineTo(cx - 15, cy - 30);
+      sctx.lineTo(cx + 15, cy - 30);
+      sctx.closePath();
+      sctx.stroke();
+      // Olive on a stick
+      line(cx, cy - 15, cx + 8, cy - 35);
+      sctx.beginPath();
+      sctx.arc(cx + 6, cy - 28, 2, 0, Math.PI * 2);
+      sctx.stroke();
+    } else if (kind === 111) {
+      // LUGGAGE (Classic trunk style)
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      // Main body
+      sctx.strokeRect(cx - 18, cy - 10, 36, 22);
+      // Handle
+      sctx.beginPath();
+      sctx.moveTo(cx - 5, cy - 10);
+      sctx.lineTo(cx - 5, cy - 15);
+      sctx.lineTo(cx + 5, cy - 15);
+      sctx.lineTo(cx + 5, cy - 10);
+      sctx.stroke();
+      // Straps (Two vertical lines)
+      line(cx - 10, cy - 10, cx - 10, cy + 12);
+      line(cx + 10, cy - 10, cx + 10, cy + 12);
     } else {
       // Fallback: tiny memphis squiggle
       const tx = (x + w * 0.18) | 0;
