@@ -1066,7 +1066,6 @@ const PHRASES_80S_HOOKS = [
   "SPACEBALLS",
   "RAIDERS OF THE LOST ARK",
   "E.T.",
-  "DAS BOOT",
   "COLOR PURPLE",
   "DYNASTY",
   "GREMLINS",
@@ -1193,16 +1192,30 @@ function stampCompositeRegion(
   }
 }
 
+
+
 function drawJitterText(x, y, textStr, maxW) {
   const sctx = stamp.ctx;
+  let size = 9 + randInt(10);
 
-  const size = 7 + randInt(8);
-  sctx.font = `${size}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`;
+  // shrink-to-fit
+  while (size > 8) {
+    sctx.font = `${size}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`;
+    if (sctx.measureText(textStr).width <= maxW) break;
+    size--;
+  }
+
   sctx.textBaseline = "top";
+
+  // clamp start so it fits on the stamp canvas (prevents edge clipping)
+  const w = sctx.measureText(textStr).width;
+  const pad = 2;
+  x = clamp(x, pad, px.w - w - pad);
+  y = clamp(y, pad, px.h - size - pad);
 
   let cx = x;
   const baseY = y;
-  const jitter = 0.8 + randInt(1.6);
+  const jitter = 0.8 + rand() * 1.6;
   const tilt = rand() * 0.16 - 0.08;
 
   sctx.save();
@@ -1236,13 +1249,12 @@ function drawJitterText(x, y, textStr, maxW) {
       sctx.restore();
     }
 
-    const w = sctx.measureText(ch).width;
-    cx += w + (rand() < 0.22 ? 0 : 1);
-    if (cx > x + maxW) break;
+    cx += sctx.measureText(ch).width + (rand() < 0.22 ? 0 : 1);
   }
 
   sctx.restore();
 }
+
 
 function drawBlueprint(x, y, w, h) {
   const sctx = stamp.ctx;
