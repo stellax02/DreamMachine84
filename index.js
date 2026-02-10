@@ -637,7 +637,7 @@ const KNIGHT = [
 // Shuffle-bag helpers (even frequency / no repeats until cycle)
 // ---------------------------
 
-const SYMBOL_COUNT = 100;
+const SYMBOL_COUNT = 112;
 let symbolBag = [];
 function nextSymbolKind() {
   if (!symbolBag.length) {
